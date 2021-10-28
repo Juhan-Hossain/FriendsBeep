@@ -68,7 +68,7 @@ namespace FriendsBeep.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
                              .AllowAnyMethod()
                              .AllowAnyHeader());
 
