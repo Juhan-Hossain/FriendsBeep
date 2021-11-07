@@ -19,15 +19,15 @@ namespace FriendsBeep.Repository
         {
             _dbContext = dbContext;
         }
-        public ServiceResponse<T> Add(T unit)
+        public async Task<ServiceResponse<T>> Add(T unit)
         {
             var serviceResponse = new ServiceResponse<T>();
             try
             {
                 serviceResponse.Data = unit;
-                _dbContext.Set<T>().Add(serviceResponse.Data);
-                _dbContext.SaveChanges();
-                serviceResponse.Message = "Unit created successfully in DB";
+                await _dbContext.Set<T>().AddAsync(serviceResponse.Data);
+                await _dbContext.SaveChangesAsync();
+                serviceResponse.Message = "unit created successfully in DB";
 
             }
             catch (Exception exception)
@@ -184,9 +184,6 @@ namespace FriendsBeep.Repository
             return serviceResponse;
         }
 
-        /*ServiceResponse<IEnumerable<T>> IRepository<T>.GetAll()
-        {
-            throw new NotImplementedException();
-        }*/
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FriendsBeep.Business;
 using FriendsBeep.Entities.Models;
 using FriendsBeep.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace FriendsBeep.Api.Controllers
         }
 
         // GET: api/Users/GetUsers:(All)
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<IEnumerable<AppUser>>>> GetUsers()
         {
@@ -27,6 +29,7 @@ namespace FriendsBeep.Api.Controllers
             return Ok(serviceResponse);
         }
         // GET: api/Users/GetUserById/3:(id=3)
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<AppUser>>> GetUserById(int id)
         {

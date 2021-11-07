@@ -11,7 +11,7 @@ namespace FriendsBeep.Repository
     {
         public Task<ServiceResponse<IEnumerable<T>>> GetAll();
         public Task<ServiceResponse<T>> GetById(int? id);
-        public ServiceResponse<T> Add(T unit);
+        public Task<ServiceResponse<T>> Add(T unit);
         public ServiceResponse<T> Update(T unit);
         public ServiceResponse<T> Update(int id, T unit);
         public ServiceResponse<T> Delete(T unit);
