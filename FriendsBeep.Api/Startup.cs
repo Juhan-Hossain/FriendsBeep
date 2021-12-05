@@ -35,15 +35,11 @@ namespace FriendsBeep.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //resolves camelcase problem & looping problem
-            /*services.AddControllers().AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });*/
+            //extendsServices
             services.AddApplicationServices(_config);
             services.AddControllers();
             services.AddMvc();
+            //ExtendsTokenService
             services.AddIdentityServices(_config);
         }
 
@@ -66,7 +62,8 @@ namespace FriendsBeep.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
+            app.UseCors(builder => builder
+                             .WithOrigins("https://localhost:4200")
                              .AllowAnyMethod()
                              .AllowAnyHeader());
             app.UseAuthentication();

@@ -64,7 +64,7 @@ namespace FriendsBeep.Api.Controllers
             else
             {
                 ServiceResponse<UserDto> dtoServiceResponse = new ServiceResponse<UserDto>();
-                dtoServiceResponse.Message = "User Created Successfully";
+                dtoServiceResponse.Message = "User LoggedIn Successfully";
                 dtoServiceResponse.Data = new UserDto
                 {
                     UserName = response.Data.UserName,
