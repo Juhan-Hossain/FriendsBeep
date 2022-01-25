@@ -1,4 +1,5 @@
 using FriendsBeep.Api.Extensions;
+using FriendsBeep.Api.Hubs;
 using FriendsBeep.Business;
 using FriendsBeep.Business.Interfaces;
 using FriendsBeep.Business.Services;
@@ -37,6 +38,7 @@ namespace FriendsBeep.Api
         {
             //extendsServices
             services.AddApplicationServices(_config);
+            services.AddSignalR();
             services.AddControllers();
             services.AddMvc();
             //ExtendsTokenService
@@ -62,10 +64,13 @@ namespace FriendsBeep.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseCors(builder => builder
                              .WithOrigins("https://localhost:4200")
                              .AllowAnyMethod()
                              .AllowAnyHeader());
+            
             app.UseAuthentication();
 
             app.UseAuthorization();
@@ -73,6 +78,7 @@ namespace FriendsBeep.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<NotifyHub>("/notifyHub");
             });
         }
     }

@@ -23,5 +23,6 @@ namespace FriendsBeep.Data
 
 
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

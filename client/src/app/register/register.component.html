@@ -1,6 +1,6 @@
 <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
   <h2 class="class-center text-primary">Sign Up</h2>
-  <hr>
+  <hr />
   <div class="form-group input-group">
     <div class="input-group-prepend">
       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -35,7 +35,11 @@
   </div>
   <!-- form-group// -->
   <div class="form-group">
-    <button type="submit" class="btn btn-primary btn-block mr-2">
+    <button
+      type="submit"
+      class="btn btn-primary btn-block mr-2"
+      (click)="register()"
+    >
       Create Account
     </button>
   </div>

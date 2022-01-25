@@ -18,13 +18,11 @@ namespace FriendsBeep.Api.Controllers
     public class AccountController : BaseController
     {
         private readonly IUsersBLL _service;
-        private readonly DataContext _dataContext;
         private readonly ITokenService _tokenService;
 
-        public AccountController(IUsersBLL service,DataContext dataContext,ITokenService tokenService)
+        public AccountController(IUsersBLL service,ITokenService tokenService)
         {
             _service = service;
-            _dataContext = dataContext;
             _tokenService = tokenService;
         }
         [HttpPost("register")]
