@@ -29,9 +29,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         console.log(response);
         this.cancel();
       },
-      (err) => {
-        // console.log(err);
-      }
+      (err) => {}
     );
   }
   cancel() {
