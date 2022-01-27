@@ -3,29 +3,33 @@
     <a class="navbar-brand" routerLink="/" routerLinkActive="active"
       >Friend's Beep</a
     >
-    <ul class="navbar-nav mr-auto" *ngIf="loggedIn">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/friends" routerLinkActive="active"
-          >Friends</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/lists" routerLinkActive="active"
-          >Lists</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/messages" routerLinkActive="active"
-          >Messages</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logOut()" href="#">Logout</a>
-      </li>
+    <ul class="navbar-nav mr-auto">
+      <ng-container *ngIf="loggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/friends" routerLinkActive="active"
+            >Friends</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lists" routerLinkActive="active"
+            >Lists</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/messages" routerLinkActive="active"
+            >Messages</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()" href="#">Logout</a>
+        </li>
+      </ng-container>
     </ul>
 
     <div class="dropdown" *ngIf="loggedIn" dropdown>
-      <a class="dropdown-toggle text-light" dropdownToggle>Welcome Users</a>
+      <a class="dropdown-toggle text-light" dropdownToggle
+        >Welcome {{ userName | titlecase }}</a
+      >
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item">Edit profile</a>
         <a class="dropdown-divider"></a>

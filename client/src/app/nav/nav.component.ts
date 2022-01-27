@@ -12,6 +12,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   model: any = {};
   loggedIn: boolean;
+  userName: any;
 
   constructor(
     public accountService: AccountService,
@@ -24,13 +25,15 @@ export class NavComponent implements OnInit {
   }
   login() {
     this.accountService.login(this.model).subscribe(
-      (response) => {
+      (response): any => {
         this.loggedIn = true;
+        this.userName = response.userName;
         this.router.navigateByUrl('/friends');
+
+        this.toastr.success('Welcome ' + this.userName);
       },
       (error) => {
-        console.log(error);
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.message);
       }
     );
   }

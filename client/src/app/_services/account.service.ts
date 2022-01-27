@@ -19,7 +19,7 @@ export class AccountService {
   login(model: any) {
     return this.http
       .post<User>(this.baseUrl + 'Account/login', model)
-      .pipe<serviceResponse>(
+      .pipe<any>(
         map((response: any) => {
           const user = response.data;
           if (user) {

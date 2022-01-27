@@ -5,13 +5,25 @@ import { FriendsProfileComponent } from './friends/friends-profile/friends-profi
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'friends', component: FriendsListComponent },
-  { path: 'friends/:id', component: FriendsProfileComponent },
-  { path: 'lists', component: ListsComponent },
-  { path: 'messages', component: MessagesComponent },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'friends',
+        component: FriendsListComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: 'friends/:id', component: FriendsProfileComponent },
+      { path: 'lists', component: ListsComponent },
+      { path: 'messages', component: MessagesComponent },
+    ],
+  },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
