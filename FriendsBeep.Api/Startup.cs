@@ -1,5 +1,7 @@
+using FriendsBeep.Api.Errors;
 using FriendsBeep.Api.Extensions;
 using FriendsBeep.Api.Hubs;
+using FriendsBeep.Api.Middlewares;
 using FriendsBeep.Business;
 using FriendsBeep.Business.Interfaces;
 using FriendsBeep.Business.Services;
@@ -50,9 +52,11 @@ namespace FriendsBeep.Api
         {
 
 
+           // app.UseMiddleware<APIException>();
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "University_Student_Management v1"));
             }
@@ -62,6 +66,7 @@ namespace FriendsBeep.Api
             .AllowAnyMethod()
             .AllowAnyHeader());
             app.UseHttpsRedirection();
+            app.UseExceptionMiddleware();
 
             app.UseRouting();
             app.UseDefaultFiles();
