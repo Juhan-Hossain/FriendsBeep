@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import {
   Component,
   EventEmitter,
@@ -6,6 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { serviceResponse } from '../_models/serviceResponse';
 import { AccountService } from '../_services/account.service';
 
@@ -19,17 +21,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
   model: any = {};
   sub: any;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private toastr: ToastrService
+  ) {}
   ngOnInit(): void {}
 
   register() {
-    // console.log(this.model);
     this.sub = this.accountService.register(this.model).subscribe(
       (response) => {
-        console.log(response);
         this.cancel();
       },
-      (err) => {}
+      (err) => {
+        //debugger;
+        console.log(err);
+        if (err.error !== 'Username is already taken') {
+          this.toastr.error(err[0], err[1]);
+        } else this.toastr.error(err.error);
+      }
     );
   }
   cancel() {

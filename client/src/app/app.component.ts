@@ -15,7 +15,7 @@ import { AccountService } from './_services/account.service';
 export class AppComponent implements OnInit {
   title: string = "Friend's Beep";
   users: any;
-  constructor(private accountService:AccountService) {}
+  constructor(private accountService: AccountService) {}
   ngOnInit(): void {
     // this.getUsers();
     this.setCurrentUser();
@@ -25,18 +25,4 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(localStorage.getItem('user') || '{}');
     this.accountService.setCurrentUser(user);
   }
-
-  // getUsers() {
-  //   this.http
-  //     .get<serviceResponse>('https://localhost:44332/api/Users')
-  //     .subscribe(
-  //       (response: any) => {
-  //         this.users = response.data;
-  //         console.log("data----->",this.users);
-  //       },
-  //       (error: any) => {
-  //         console.log(error);
-  //       }
-  //     );
-  // }
 }
