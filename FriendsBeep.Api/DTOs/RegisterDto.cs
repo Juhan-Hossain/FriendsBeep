@@ -11,6 +11,7 @@ namespace FriendsBeep.Api.DTOs
         [Required]
         public string UserName { get; set; }
         [Required]
+        [StringLength(8,MinimumLength =3)]
         public string Password { get; set; }
     }
 }
