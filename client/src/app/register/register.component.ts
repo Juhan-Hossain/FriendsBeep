@@ -33,8 +33,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.cancel();
       },
       (err) => {
-        console.log(err.error);
-        this.toastr.error(err.error);
+        //debugger;
+        console.log(err);
+        if (err.error !== 'Username is already taken') {
+          this.toastr.error(err[0], err[1]);
+        } else this.toastr.error(err.error);
       }
     );
   }

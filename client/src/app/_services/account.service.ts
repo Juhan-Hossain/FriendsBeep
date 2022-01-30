@@ -32,7 +32,7 @@ export class AccountService {
   }
   register(model: any) {
     return this.http
-      .post<any>(this.baseUrl + 'Account/register', model)
+      .post<User>(this.baseUrl + 'Account/register', model)
       .pipe<any>(
         map((response: any) => {
           const user = response.data;

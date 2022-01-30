@@ -31,10 +31,10 @@ export class NavComponent implements OnInit {
         this.router.navigateByUrl('/friends');
 
         this.toastr.success('Welcome ' + this.userName);
-      },
-      (error) => {
-        this.toastr.error(error.error.message);
       }
+      // (error) => {
+      //   this.toastr.error(error.error.message);
+      // }
     );
   }
   logOut() {
