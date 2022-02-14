@@ -21,6 +21,7 @@ namespace FriendsBeep.Api.Extensions
             services.AddScoped<IUsersBLL, UsersBLL>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IErrorHandler,ErrorHandler>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo

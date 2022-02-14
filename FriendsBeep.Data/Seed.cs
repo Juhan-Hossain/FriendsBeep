@@ -14,7 +14,7 @@ namespace FriendsBeep.Data
         public static async Task SeedUsers(DataContext context)
         {
             if (await context.Users.AnyAsync()) return;
-            var userData = await System.IO.File.ReadAllTextAsync("FriendsBeep.Data/UserSeedData.json");
+            var userData = await System.IO.File.ReadAllTextAsync("C:/Users/BS161/Desktop/Office/FriendsBeepMain/FriendsBeep/FriendsBeep.Data/UserSeedData.json");
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
             foreach (var user in users)
             {

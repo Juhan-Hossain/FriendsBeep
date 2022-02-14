@@ -1,4 +1,5 @@
 ﻿using FriendsBeep.Business;
+using FriendsBeep.Business.Interfaces;
 using FriendsBeep.Entities.Models;
 using FriendsBeep.Repository;
 using Microsoft.AspNetCore.Authorization;
@@ -10,32 +11,34 @@ using System.Threading.Tasks;
 
 namespace FriendsBeep.Api.Controllers
 {
+    //[Authorize]
     public class UsersController:BaseController
     {
         private readonly IUsersBLL _service;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(IUsersBLL service)
+        public UsersController(IUsersBLL service,IUserRepository userRepository)
         {
             _service = service;
+            _userRepository = userRepository;
         }
 
         // GET: api/Users/GetUsers:(All)
-        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<AppUser>>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var serviceResponse = await _service.GetAll();
-            if (serviceResponse.Success == false) return BadRequest(serviceResponse);
-            return Ok(serviceResponse);
+            return Ok(await _userRepository.GetUsersAsync());
         }
-        // GET: api/Users/GetUserById/3:(id=3)
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<AppUser>>> GetUserById(int id)
+        // GET: api/Users/id/3:(id=3)
+        [HttpGet("{id}/userId")]
+        public async Task<ActionResult<AppUser>> GetUserById(int id)
         {
-            var serviceResponse = await _service.GetById(id);
-            if (serviceResponse.Success == false) return BadRequest(serviceResponse);
-            return Ok(serviceResponse);
+            return Ok(await _userRepository.GetUserByIdAsync(id));
+        }
+        [HttpGet("{username}/username")]
+        public async Task<ActionResult<AppUser>> GetByUsername(string username)
+        {
+            return Ok(await _userRepository.GetUserByUsername(username));
         }
     }
 }
